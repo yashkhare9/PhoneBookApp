@@ -236,7 +236,7 @@ void PhoneBookMethods::AddContacts() // Adding Contacts
 									cout << "\n\n\t\tEnter the New Contact No.:";
 									PhoneNo = GetNo();
 									ch = MergeContacts(PhoneNo);
-									while (ch != 'n' || ch != 'N')
+									while (ch != 'n' && ch != 'N')
 									{
 										if (ch == 'y' || ch == 'Y')
 										{
@@ -248,10 +248,6 @@ void PhoneBookMethods::AddContacts() // Adding Contacts
 											{
 												PhoneNo = GetNo();
 											}
-										}
-										if (ch == 'n' || ch == 'N')
-										{
-											break;
 										}
 									}
 									ch = 'c';
@@ -275,7 +271,7 @@ void PhoneBookMethods::AddContacts() // Adding Contacts
 							cout << "\n\n\t\tEnter the New Contact No.:";
 							PhoneNo = GetNo();
 							ch = MergeContacts(PhoneNo);
-							while (ch != 'n' || ch != 'N')
+							while (ch != 'n' && ch != 'N')
 							{
 								if (ch == 'y' || ch == 'Y')
 								{
@@ -288,11 +284,8 @@ void PhoneBookMethods::AddContacts() // Adding Contacts
 										PhoneNo = GetNo();
 									}
 								}
-								if (ch == 'n' || ch == 'N')
-								{
-									break;
-								}
 							}
+							ch = 'a';
 							break;
 						}
 					}
@@ -538,7 +531,7 @@ void PhoneBookMethods::AddNewContact(Contact& NewContact) //Add New Contacts
 	}
 	else if (ch == 'y')
 	{
-		while (ch != 'n' || ch != 'N')
+		while (ch != 'n' && ch != 'N')
 		{
 			cout << "\n\n\t\tDo you want to add more contact numbers to " << NewContact.ContactName << "?";
 			cout << "\n\n\t\ty = Yes & n = No\n\n\t\tEnter your choice: ";
@@ -550,7 +543,6 @@ void PhoneBookMethods::AddNewContact(Contact& NewContact) //Add New Contacts
 			if (ch == 'n' || ch == 'N')
 			{
 				Contacts.push_back(NewContact);
-				break;
 			}
 		}
 	}
@@ -1040,7 +1032,7 @@ char PhoneBookMethods::MergeContacts(string PhoneNo) // Check to Merge Contacts
 	{
 		for (string& MergeNo : MergeContact.ContactNo)
 		{
-			while (MergeNo == PhoneNo)
+			if (MergeNo == PhoneNo)
 			{
 				DisplaySpecificContacts(PhoneNo);
 				cout << "\n\n\t\b\b\b======================================================================";
@@ -1056,11 +1048,6 @@ char PhoneBookMethods::MergeContacts(string PhoneNo) // Check to Merge Contacts
 				{
 					return 'y';
 				}
-				else
-				{
-					cout << "\n\n\t\b\b\bContact not added";
-					return 'n';
-				}
 			}
 		}
 	}
@@ -1069,22 +1056,14 @@ char PhoneBookMethods::MergeContacts(string PhoneNo) // Check to Merge Contacts
 
 bool PhoneBookMethods::CheckExistingContact(string Name) // Check for Existing Contact Name
 {
-	int Flag = 1;
 	for (Contact CheckContact : Contacts)
 	{
 		if (CheckContact.ContactName == Name)
 		{
-			Flag = 0;
+			return true;
 		}
 	}
-	if (Flag == 0)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 int PhoneBookMethods::SearchByName(string Detail) // Search By string
@@ -1095,7 +1074,8 @@ int PhoneBookMethods::SearchByName(string Detail) // Search By string
 	int Counter = 0;
 	for (Contact SearchContact : Contacts)
 	{
-		if (SearchContact.ContactName.substr(0, Detail.length()) == Detail)
+		//if (SearchContact.ContactName.substr(0, Detail.length()) == Detail)
+		if(!SearchContact.ContactName.find(Detail))
 		{
 			cout << "\n\n\t\tContact Name: " << SearchContact.ContactName << "\n";
 			for (string DisplayNo : SearchContact.ContactNo)
@@ -1156,5 +1136,3 @@ void PhoneBookMethods::FillPhoneBook() // Fill DB with Dummy Data
 		Contacts.push_back(Temp);
 	}
 }
-
-
