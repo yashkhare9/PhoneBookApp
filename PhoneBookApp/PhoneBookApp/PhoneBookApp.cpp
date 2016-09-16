@@ -285,7 +285,7 @@ void PhoneBookMethods::AddContacts() // Adding Contacts
 									}
 								}
 							}
-							ch = 'a';
+							ch = 'x';
 							break;
 						}
 					}
