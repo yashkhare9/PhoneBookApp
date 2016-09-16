@@ -250,12 +250,12 @@ void PhoneBookMethods::AddContacts() // Adding Contacts
 											}
 										}
 									}
-									ch = 'c';
+									ch = 'c'; // Change in value of 'ch' to exit the loop & does not enter any other option.
 									break;
 								}
 							}
 						}
-						if (ch == 'c')
+						if (ch == 'c') // Change in value of 'ch' to exit the loop & does not enter any other option.
 						{
 							break;
 						}
@@ -285,7 +285,7 @@ void PhoneBookMethods::AddContacts() // Adding Contacts
 									}
 								}
 							}
-							ch = 'x';
+							ch = 'x'; // Change in value of 'ch' to exit the loop & does not enter any other option.
 							break;
 						}
 					}
